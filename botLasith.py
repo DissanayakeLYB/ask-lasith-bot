@@ -33,7 +33,7 @@ embeddings = OpenAIEmbeddings(openai_api_key = OPENAI_API_KEY)
 
 vector_store = FAISS.from_texts(chunks, embeddings)
 
-user_question = st.chat_input("Ask the question...")
+user_question = input("Ask the question :")
 
     
 
