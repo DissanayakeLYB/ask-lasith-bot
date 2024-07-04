@@ -1,14 +1,41 @@
-from fastapi import FastAPI
+from flask import Flask, request, jsonify
 
-app = FastAPI()
+app = Flask(__name__)
+
+# GET = REQUEST DATA FROM A SPECIFIED RESOURCE
+# POST = CREATE A RESOURCE
+# PUT = UPDATE A RESOURCE
+# DELETE = DELETE A RESOURCE
 
 
-@app.get("/")
-def read():
-    return {"hello": "world"}
+@app.route("/get-user/<user_id>")
+def get_user(user_id):
+    user_data = {
+        "user_id" : user_id,
+        "name" : "John Doe",
+        "email" : "john.doe@example.com"
+        }
+    
+    extra = request.args.get("extra")
+
+    if extra:
+        user_data["extra"] = extra
+
+    return jsonify(user_data), 200
+
+
+@app.route("/create-user", methods=["POST"])
+def create_user():
+    data = request.get_json()
+
+    return jsonify(data), 201
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    app.run(debug=True)
