@@ -15,7 +15,7 @@ def get_user(user_id):
         "name" : "John Doe",
         "email" : "john.doe@example.com"
         }
-    
+
     extra = request.args.get("extra")
 
     if extra:
@@ -29,12 +29,6 @@ def create_user():
     data = request.get_json()
 
     return jsonify(data), 201
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
